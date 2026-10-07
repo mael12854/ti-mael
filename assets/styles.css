@@ -1,0 +1,740 @@
+/* ==========================================================================
+   Ti Maël — site vitrine.
+   Jetons, composants et règles repris de la charte de marque (2026 · v2),
+   transposés en unités d'écran (rem / px) et en mise en page fluide.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Jetons de la charte
+   -------------------------------------------------------------------------- */
+
+:root {
+  /* Palette principale */
+  --ardoise: #1f3a4d;
+  --beurre: #e2b44b;
+  --lin: #f3eee3;
+
+  /* Accents */
+  --homard: #c2452d;
+  --ble-noir: #7a5434;
+  --goemon: #4f6b4a;
+  --encre: #1a2026;
+
+  /* Déclinaisons de lisibilité */
+  --beurre-texte: #8a6416;
+  --homard-texte: #a63a25;
+  --papier: #fdfbf6;
+  --texte: #39424a;
+  --gris: #6b7378;
+  --gris-barre: #8c9296;
+  --gris-ardoise: #9aa9b3;
+  --filet: #dcd5c6;
+  --pointille: #c4bcab;
+
+  /* Typographie */
+  --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --sans: "Jost", "Helvetica Neue", Arial, sans-serif;
+
+  /* Mise en page */
+  --largeur: 1120px;
+  --gouttiere: clamp(16px, 5vw, 48px);
+  --section: clamp(64px, 10vw, 120px);
+}
+
+/* --------------------------------------------------------------------------
+   2. Base
+   -------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, p, ul, ol, dl, dd, figure {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  background: var(--papier);
+  color: var(--encre);
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+a {
+  color: var(--ardoise);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--homard);
+}
+
+:focus-visible {
+  outline: 2px solid var(--beurre);
+  outline-offset: 3px;
+}
+
+.conteneur {
+  width: 100%;
+  max-width: calc(var(--largeur) + 2 * var(--gouttiere));
+  margin: 0 auto;
+  padding: 0 var(--gouttiere);
+}
+
+.evitement {
+  position: absolute;
+  left: 16px;
+  top: -100px;
+  z-index: 100;
+  padding: 10px 16px;
+  background: var(--ardoise);
+  color: var(--lin);
+}
+
+.evitement:focus {
+  top: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   3. Éléments partagés (charte)
+   -------------------------------------------------------------------------- */
+
+/* Surtitre : Jost Medium, interlettrage 0,16 em, capitales. */
+.surtitre {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ardoise);
+}
+
+.surtitre--gris { color: var(--gris); }
+.surtitre--alerte { color: var(--homard-texte); }
+.surtitre--beurre { color: var(--beurre-texte); }
+.surtitre--clair { color: var(--beurre); }
+
+.mention {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ardoise);
+}
+
+.italique {
+  font-style: italic;
+  color: var(--ardoise);
+}
+
+.entete {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  padding-bottom: 20px;
+  margin-bottom: clamp(32px, 5vw, 48px);
+  border-bottom: 1px solid var(--filet);
+}
+
+.entete__numero {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
+  color: var(--homard);
+}
+
+.entete__titre {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  line-height: 1.1;
+}
+
+.pied {
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  color: var(--gris);
+}
+
+.filet-homard {
+  width: 128px;
+  height: 2px;
+  margin: 32px 0;
+  background: var(--homard);
+}
+
+.trio {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 820px) {
+  .trio { grid-template-columns: 1fr; }
+}
+
+/* Boutons — Beurre salé pour l'appel principal, Ardoise pour l'appui. */
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 24px;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1.5px solid transparent;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.bouton--beurre {
+  background: var(--beurre);
+  color: var(--encre);
+}
+
+.bouton--beurre:hover {
+  background: var(--lin);
+  color: var(--encre);
+}
+
+.bouton--ardoise {
+  background: var(--ardoise);
+  color: var(--lin);
+}
+
+.bouton--ardoise:hover {
+  background: var(--encre);
+  color: var(--lin);
+}
+
+.bouton--contour {
+  border-color: var(--ardoise);
+  color: var(--ardoise);
+}
+
+.bouton--contour:hover {
+  background: var(--ardoise);
+  color: var(--lin);
+}
+
+/* --------------------------------------------------------------------------
+   4. Badge — un <symbol> unique, couleurs par variables.
+   -------------------------------------------------------------------------- */
+
+.badge-source {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.badge {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  --badge-anneau: var(--ardoise);
+  --badge-lettrage: var(--lin);
+  --badge-marque: var(--beurre);
+  --badge-ciel: #dfe7e6;
+  --badge-sol: #cdc4b2;
+  --badge-pierre: #b9b3a6;
+  --badge-toit: #3d4955;
+  --badge-vitre: #26343e;
+  --badge-porte: var(--homard);
+  --badge-store-a: var(--ardoise);
+  --badge-enseigne: var(--beurre);
+}
+
+/* Monochrome, à poser sur un aplat Ardoise. */
+.badge--mono {
+  --badge-anneau: var(--lin);
+  --badge-lettrage: var(--ardoise);
+  --badge-marque: var(--ardoise);
+  --badge-ciel: var(--lin);
+  --badge-sol: var(--lin);
+  --badge-pierre: var(--lin);
+  --badge-toit: var(--ardoise);
+  --badge-vitre: var(--ardoise);
+  --badge-porte: var(--ardoise);
+  --badge-store-a: var(--ardoise);
+  --badge-enseigne: var(--ardoise);
+}
+
+/* --------------------------------------------------------------------------
+   5. Motifs — un seul par support, jamais plus d'un tiers de la surface.
+   -------------------------------------------------------------------------- */
+
+/* Marinière — rayures horizontales. */
+.bandeau-mariniere {
+  height: 15px;
+  background: repeating-linear-gradient(180deg, var(--ardoise) 0 2.5px, var(--lin) 2.5px 5px);
+}
+
+/* Vagues — arcs en quinconce (rubrique fruits de mer). */
+.motif--vagues {
+  background:
+    radial-gradient(circle at 50% 100%, var(--ardoise) 0 17px, transparent 18px) 0 0 / 38px 38px,
+    radial-gradient(circle at 50% 100%, var(--ardoise) 0 17px, transparent 18px) 19px 19px / 38px 38px,
+    var(--lin);
+}
+
+/* Nappe vichy — carreaux blé noir (pied de page). */
+.bandeau-nappe {
+  height: 40px;
+  background:
+    linear-gradient(90deg, rgb(122 84 52 / 0.5) 50%, transparent 0) 0 0 / 38px 38px,
+    linear-gradient(rgb(122 84 52 / 0.5) 50%, transparent 0) 0 0 / 38px 38px,
+    var(--lin);
+}
+
+/* --------------------------------------------------------------------------
+   6. En-tête du site
+   -------------------------------------------------------------------------- */
+
+.entete-site {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgb(253 251 246 / 0.96);
+  border-bottom: 1px solid var(--filet);
+  backdrop-filter: blur(6px);
+}
+
+.entete-site__barre {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  min-height: 72px;
+}
+
+.signature {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--encre);
+  text-decoration: none;
+}
+
+.signature:hover {
+  color: var(--encre);
+}
+
+/* Taille minimale écran du badge : 64 px (charte). */
+.signature__badge {
+  width: 64px;
+  height: 64px;
+  flex: none;
+  margin: 4px 0;
+}
+
+.signature__nom {
+  font-family: var(--serif);
+  font-size: 1.375rem;
+  line-height: 1.05;
+}
+
+.navigation {
+  display: flex;
+  gap: 28px;
+  margin-left: auto;
+}
+
+.navigation a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ardoise);
+}
+
+.navigation a:hover {
+  color: var(--homard);
+}
+
+@media (max-width: 820px) {
+  .navigation { display: none; }
+  .entete-site__appel { margin-left: auto; }
+}
+
+/* --------------------------------------------------------------------------
+   7. Accueil
+   -------------------------------------------------------------------------- */
+
+.accueil {
+  background: var(--lin);
+  padding: clamp(56px, 9vw, 112px) 0;
+}
+
+.accueil__grille {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  align-items: center;
+  gap: 48px;
+}
+
+.accueil__titre {
+  margin-top: 24px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(4rem, 11vw, 7.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+
+.accueil__accroche {
+  max-width: 34em;
+  font-size: clamp(1.0625rem, 1.6vw, 1.1875rem);
+  line-height: 1.55;
+  color: var(--texte);
+  text-wrap: pretty;
+}
+
+.accueil__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.accueil__badge {
+  justify-self: center;
+  width: min(100%, 340px);
+  aspect-ratio: 1;
+}
+
+@media (max-width: 820px) {
+  .accueil__grille { grid-template-columns: 1fr; }
+  .accueil__badge { order: -1; justify-self: start; width: 140px; }
+}
+
+/* --------------------------------------------------------------------------
+   8. Sections
+   -------------------------------------------------------------------------- */
+
+.section {
+  padding: var(--section) 0;
+}
+
+.section--lin {
+  background: var(--lin);
+}
+
+.section--ardoise {
+  background: var(--ardoise);
+  color: var(--lin);
+}
+
+.chapo {
+  max-width: 24em;
+  margin-bottom: clamp(32px, 5vw, 56px);
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.35;
+  color: var(--ardoise);
+  text-wrap: pretty;
+}
+
+.principe {
+  padding: 28px;
+  background: var(--lin);
+  border-top: 3px solid var(--ardoise);
+}
+
+.principe--beurre { border-top-color: var(--beurre); }
+.principe--homard { border-top-color: var(--homard); }
+
+.principe__texte {
+  margin-top: 16px;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--texte);
+}
+
+/* Emplacements photo : à remplacer par des <img> une fois les visuels choisis.
+   Consigne : lumière de fenêtre, vue de dessus, pas de filtre ni fond studio. */
+.galerie {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+
+@media (max-width: 820px) {
+  .galerie { grid-template-columns: 1fr 1fr; }
+  .galerie > :last-child { display: none; }
+}
+
+.emplacement-photo {
+  aspect-ratio: 4 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border: 1.5px dashed var(--pointille);
+  border-radius: 4px;
+  background: rgb(26 32 38 / 0.03);
+  color: var(--gris);
+  text-align: center;
+}
+
+.emplacement-photo svg {
+  opacity: 0.55;
+}
+
+.emplacement-photo figcaption {
+  font-size: 0.875rem;
+  line-height: 1.3;
+}
+
+/* --------------------------------------------------------------------------
+   9. La carte
+   -------------------------------------------------------------------------- */
+
+.carte-du-jour {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) 2fr;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 960px) {
+  .carte-du-jour { grid-template-columns: 1fr; }
+}
+
+/* Ardoise — craie blanche sur ardoise noire, prix à droite, sans centimes. */
+.ardoise {
+  position: sticky;
+  top: 104px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 32px;
+  background: var(--encre);
+  color: var(--lin);
+}
+
+@media (max-width: 960px) {
+  .ardoise { position: static; }
+}
+
+.ardoise__titre {
+  font-family: var(--serif);
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+.ardoise__carte {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 1.0625rem;
+}
+
+.ardoise__ligne {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.ardoise__prix {
+  color: var(--beurre);
+  white-space: nowrap;
+}
+
+.ardoise__note {
+  padding-top: 16px;
+  border-top: 1px solid rgb(243 238 227 / 0.15);
+  font-size: 0.9375rem;
+  color: var(--gris-ardoise);
+}
+
+.ardoise__souligne {
+  color: var(--lin);
+  text-decoration: underline;
+  text-decoration-color: var(--beurre);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 640px) {
+  .menu { grid-template-columns: 1fr; }
+}
+
+.rubrique {
+  padding: 28px;
+  background: var(--papier);
+}
+
+.rubrique--mer {
+  padding-top: 0;
+}
+
+.rubrique__motif {
+  height: 28px;
+  margin: 0 -28px 24px;
+}
+
+.rubrique__titre {
+  margin-bottom: 16px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.625rem;
+  line-height: 1.1;
+}
+
+.rubrique__liste {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0;
+  list-style: none;
+}
+
+/* Prix : Jost Medium, aligné à droite, sans centime superflu. */
+.plat {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  font-size: 1rem;
+}
+
+.plat__nom {
+  display: flex;
+  flex-direction: column;
+}
+
+.plat__detail {
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--gris);
+}
+
+.plat__prix {
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--ardoise);
+}
+
+.note {
+  margin-top: 32px;
+  font-size: 0.9375rem;
+  color: var(--gris);
+}
+
+/* --------------------------------------------------------------------------
+   10. Infos pratiques — sur Ardoise, on écrit en Lin.
+   -------------------------------------------------------------------------- */
+
+.entete--clair {
+  border-bottom-color: rgb(243 238 227 / 0.2);
+}
+
+.entete--clair .entete__numero {
+  color: var(--beurre);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.info__texte {
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+
+.info__texte--doux {
+  color: var(--gris-ardoise);
+}
+
+.horaires {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  font-size: 1.0625rem;
+}
+
+.horaires div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed rgb(243 238 227 / 0.2);
+}
+
+.horaires dd {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.section--ardoise .bouton--beurre:hover {
+  background: var(--lin);
+}
+
+/* --------------------------------------------------------------------------
+   11. Pied de page
+   -------------------------------------------------------------------------- */
+
+.pied-site {
+  background: var(--lin);
+}
+
+.pied-site__corps {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-top: 56px;
+  padding-bottom: 32px;
+}
+
+.pied-site__badge {
+  width: 96px;
+  height: 96px;
+  flex: none;
+}
+
+.pied-site__phrase {
+  font-family: var(--serif);
+  font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+  line-height: 1.2;
+}
+
+.pied-site__bas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-top: 20px;
+  padding-bottom: 32px;
+  border-top: 1px solid var(--filet);
+}
