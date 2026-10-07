@@ -146,7 +146,7 @@ function afficherService(s) {
   if (radio) radio.checked = true;
   $("#service-detail").textContent =
     `Horaires : ${joursOuverts(s.jours)}, ${heure(s.debut)} – ${heure(s.fin)}. ` +
-    "Les horaires se changent dans Gestion.";
+    "Les horaires se changent dans Admin.";
 }
 
 async function chargerService() {
