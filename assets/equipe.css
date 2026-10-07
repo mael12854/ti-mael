@@ -380,3 +380,42 @@
 .signal--erreur {
   background: var(--homard);
 }
+
+/* Téléphone : la signature sur une ligne, les liens sur la suivante ;
+   les onglets défilent au lieu de passer à la ligne. */
+@media (max-width: 640px) {
+  .entete-outil__barre {
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    padding-top: 10px;
+    padding-bottom: 12px;
+  }
+
+  .entete-outil__liens {
+    width: 100%;
+    gap: 8px 16px;
+  }
+
+  .service-pastille {
+    flex: 0 0 100%;
+    padding: 6px 10px;
+    font-size: 0.6875rem;
+    text-align: center;
+  }
+
+  .onglets {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .onglets button {
+    flex: none;
+    padding: 10px 12px;
+  }
+}
+
+.tableau caption {
+  caption-side: top;
+  text-align: left;
+}

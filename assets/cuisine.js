@@ -166,6 +166,11 @@ $("#service-mode").addEventListener("change", async (e) => {
 
 async function chargerPassees() {
   const passees = await appel("cuisine_passees");
+  if (!passees.length) {
+    $("#passees").innerHTML =
+      '<caption class="message-info">Pas encore de commande des services précédents.</caption>';
+    return;
+  }
   $("#passees").innerHTML = `
     <thead><tr><th>Jour</th><th>N°</th><th>Client</th><th>Articles</th><th>Total</th><th>Statut</th></tr></thead>
     <tbody>${passees.map((c) => `
