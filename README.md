@@ -10,7 +10,7 @@ Site statique (HTML/CSS, aucune étape de build) construit d'après la charte de
 
 Pour l'aperçu, ouvrir `index.html` dans un navigateur. En ligne, `vercel.json` active les adresses courtes (`/cuisine`, `/admin`…). Pour le déploiement, publier le dossier tel quel (Vercel, Netlify, GitHub Pages).
 
-À compléter : adresse, téléphone, horaires définitifs, prix réels, photos (emplacements en pointillés).
+À compléter : adresse précise (seule « Vendée » est indiquée), horaires définitifs, prix réels, photos (emplacements en pointillés).
 
 ## Pages
 
