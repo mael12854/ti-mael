@@ -25,7 +25,19 @@ function rendre(suivi) {
   const fidelite = enregistree.fidelite;
   const lignes = facture?.lignes ?? enregistree.lignes ?? [];
 
-  zone.innerHTML = `
+  // Le formulaire d'avis vit à côté de l'état de la commande, pas dedans :
+  // quand l'avancement change, on ne redessine que l'état, et un avis en
+  // cours de saisie n'est jamais effacé.
+  if (!zone.querySelector("#suivi-etat")) {
+    zone.innerHTML = `
+      <div class="pile" id="suivi-etat"></div>
+      <div id="zone-avis"></div>
+      <p><a class="bouton bouton--contour" href="./#carte">Recommander</a></p>`;
+    rendreAvis();
+  }
+  zone.querySelector("#zone-avis").hidden = suivi.statut === "annulee";
+
+  zone.querySelector("#suivi-etat").innerHTML = `
     <p class="mention">Votre commande</p>
     <div class="rangee" style="align-items:flex-end;justify-content:space-between">
       <p class="grand-numero" aria-label="Numéro ${suivi.numero_jour}">n° ${suivi.numero_jour}</p>
@@ -60,13 +72,7 @@ function rendre(suivi) {
       ${fidelite.roue_prete
         ? '<p><a class="bouton bouton--beurre" href="fidelite.html">Tourner la roue</a></p>'
         : `<p class="info__texte--doux">Encore ${Math.max(0, fidelite.seuil - fidelite.points)} points avant de tourner la roue.</p>`}
-    </div>` : ""}
-
-    <div id="zone-avis"></div>
-
-    <p><a class="bouton bouton--contour" href="./#carte">Recommander</a></p>`;
-
-  if (suivi.statut === "servie") rendreAvis();
+    </div>` : ""}`;
 }
 
 function rendreAvis() {
@@ -78,6 +84,7 @@ function rendreAvis() {
   cible.innerHTML = `
     <form class="bloc" id="form-avis">
       <h2 class="surtitre">Votre avis</h2>
+      <p class="plat__detail">Un mot sur la commande, l'accueil ou l'attente : on lit tout.</p>
       <fieldset class="champ">
         <legend class="champ__libelle">Votre note</legend>
         <div class="etoiles">
@@ -129,8 +136,6 @@ async function actualiser() {
     if (!facture || suivi.statut !== dernierStatut) {
       facture = await rpc("facture_commande", { p_jeton: jeton }).catch(() => facture);
     }
-    // On ne redessine que si quelque chose a changé : le formulaire d'avis
-    // en cours de saisie n'est pas effacé toutes les 5 secondes.
     if (suivi.statut !== dernierStatut || !zone.querySelector(".grand-numero")) {
       dernierStatut = suivi.statut;
       rendre(suivi);
