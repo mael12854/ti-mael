@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cuisine — Ti Maël</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1f3a4d">
+<link rel="icon" href="assets/badge.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/equipe.css">
+</head>
+<body class="page-outil">
+
+<header class="entete-outil">
+  <div class="bandeau-mariniere" aria-hidden="true"></div>
+  <div class="conteneur conteneur--large entete-outil__barre">
+    <a class="signature" href="./">
+      <img class="signature__badge" src="assets/badge.svg" alt="">
+      <span class="signature__nom">Ti Maël<br><span class="italique">cuisine</span></span>
+    </a>
+    <nav class="entete-outil__liens" aria-label="Navigation" data-connecte hidden>
+      <span class="service-pastille" id="service-pastille">…</span>
+      <a href="gestion.html">Gestion</a>
+      <button type="button" data-deconnexion>Quitter</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="conteneur conteneur--large">
+
+    <form class="bloc porte" id="porte">
+      <p class="mention">Accès équipe</p>
+      <label class="champ">
+        <span class="champ__libelle">Code</span>
+        <input class="champ__saisie" name="pin" type="password" autocomplete="current-password" required>
+      </label>
+      <p class="message-erreur" role="alert" hidden></p>
+      <p><button class="bouton bouton--ardoise">Entrer</button></p>
+    </form>
+
+    <div class="pile" data-connecte hidden>
+      <div class="onglets" role="tablist">
+        <button role="tab" aria-selected="true" data-onglet="en-cours">En cours <span class="compteur" id="compteur"></span></button>
+        <button role="tab" aria-selected="false" data-onglet="ruptures">Ruptures</button>
+        <button role="tab" aria-selected="false" data-onglet="service">Service</button>
+        <button role="tab" aria-selected="false" data-onglet="passees">Passées</button>
+      </div>
+
+      <section data-panneau="en-cours">
+        <div class="tickets" id="tickets"></div>
+      </section>
+
+      <section data-panneau="ruptures" hidden>
+        <p class="plat__detail">Décochez un plat épuisé : il disparaît de la carte en ligne immédiatement.</p>
+        <div class="ruptures" id="ruptures"></div>
+      </section>
+
+      <section data-panneau="service" hidden>
+        <div class="bloc">
+          <h2 class="surtitre">Prise de commandes en ligne</h2>
+          <div class="choix-segment choix-segment--trois" id="service-mode">
+            <label><input type="radio" name="service" value="auto"> Selon les horaires</label>
+            <label><input type="radio" name="service" value="ouvert"> Forcer ouvert</label>
+            <label><input type="radio" name="service" value="ferme"> Forcer fermé</label>
+          </div>
+          <p class="plat__detail" id="service-detail"></p>
+        </div>
+      </section>
+
+      <section data-panneau="passees" hidden>
+        <div class="tableau-defilant">
+          <table class="tableau" id="passees"></table>
+        </div>
+      </section>
+    </div>
+
+  </div>
+</main>
+
+<script type="module" src="assets/cuisine.js"></script>
+</body>
+</html>

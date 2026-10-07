@@ -88,8 +88,9 @@
       <a href="#maison">La maison</a>
       <a href="#carte">La carte</a>
       <a href="#infos">Infos pratiques</a>
+      <a href="fidelite.html">Fidélité</a>
     </nav>
-    <a class="bouton bouton--beurre entete-site__appel" href="#infos">Réserver</a>
+    <a class="bouton bouton--beurre entete-site__appel" href="#carte">Commander</a>
   </div>
 </header>
 
@@ -171,19 +172,21 @@
       </header>
 
       <div class="carte-du-jour">
-        <!-- Ardoise : l'exception hors palette, assumée. Un seul mot souligné en Beurre salé. -->
-        <div class="ardoise">
+        <!-- Ardoise : l'exception hors palette, assumée. Un seul mot souligné en Beurre salé.
+             Elle affiche l'état du service, lu en direct dans la base. -->
+        <div class="ardoise" id="ardoise">
           <p class="ardoise__titre">Aujourd'hui</p>
           <div class="ardoise__carte">
-            <p class="ardoise__ligne"><span>Galette complète</span><span class="ardoise__prix">9 €</span></p>
-            <p class="ardoise__ligne"><span>Huîtres, les six</span><span class="ardoise__prix">12 €</span></p>
-            <p class="ardoise__ligne"><span>Crêpe beurre-sucre</span><span class="ardoise__prix">4 €</span></p>
-            <p class="ardoise__ligne"><span>Salade de fruits frais</span><span class="ardoise__prix">5 €</span></p>
+            <p class="ardoise__ligne"><span>Service</span><span class="ardoise__prix" data-service-etat>…</span></p>
+            <p class="ardoise__ligne"><span>Horaires</span><span class="ardoise__prix" data-service-heures>…</span></p>
+            <p class="ardoise__ligne" data-heure-mystere hidden><span data-heure-mystere-texte></span><span class="ardoise__prix" data-heure-mystere-prix></span></p>
           </div>
-          <p class="ardoise__note">La marée et les galettes du jour, à la craie. Tant qu'il y en a, <span class="ardoise__souligne">c'est servi</span>.</p>
+          <p class="ardoise__note" data-service-message>Commandez depuis la carte : on vous appelle par votre numéro <span class="ardoise__souligne">quand c'est prêt</span>.</p>
         </div>
 
-        <div class="menu">
+        <!-- La carte est lue dans la base ; ce contenu fixe ne sert que si
+             elle ne répond pas. -->
+        <div class="menu" id="menu" aria-live="polite">
           <div class="rubrique">
             <h3 class="rubrique__titre">Galettes <span class="italique">de blé noir</span></h3>
             <ul class="rubrique__liste">
@@ -227,7 +230,20 @@
         </div>
       </div>
 
-      <p class="note">Prix nets, service compris. La carte change avec la marée et la saison : demandez l'ardoise.</p>
+      <p class="note">Prix nets, service compris. La carte change avec la marée et la saison. Paiement au comptoir.</p>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       Avis
+       ======================================================================== -->
+  <section class="section" id="avis" aria-labelledby="titre-avis" hidden>
+    <div class="conteneur">
+      <header class="entete">
+        <span class="entete__numero">03</span>
+        <h2 class="entete__titre" id="titre-avis">Ils sont passés</h2>
+      </header>
+      <div class="avis-liste" id="avis-liste"></div>
     </div>
   </section>
 
@@ -237,7 +253,7 @@
   <section class="section section--ardoise" id="infos" aria-labelledby="titre-infos">
     <div class="conteneur">
       <header class="entete entete--clair">
-        <span class="entete__numero">03</span>
+        <span class="entete__numero" data-numero-infos>03</span>
         <h2 class="entete__titre" id="titre-infos">Infos pratiques</h2>
       </header>
 
@@ -250,22 +266,102 @@
         <div class="info">
           <h3 class="surtitre surtitre--clair">Horaires</h3>
           <dl class="horaires">
-            <div><dt>Mardi – samedi</dt><dd>12 h – 14 h · 19 h – 22 h</dd></div>
-            <div><dt>Dimanche</dt><dd>12 h – 15 h</dd></div>
-            <div><dt>Lundi</dt><dd>Fermé</dd></div>
+            <div><dt data-horaires-jours>Tous les jours</dt><dd data-horaires-heures>12 h – 22 h</dd></div>
           </dl>
-          <p class="info__texte info__texte--doux">Ouvert toute l'année.</p>
+          <p class="info__texte info__texte--doux" data-horaires-note>Ouvert toute l'année.</p>
         </div>
         <div class="info">
-          <h3 class="surtitre surtitre--clair">Réserver</h3>
-          <p class="info__texte">Par téléphone, ou en passant la tête par la fenêtre.</p>
-          <a class="bouton bouton--beurre" href="tel:+33000000000">[Téléphone à compléter]</a>
+          <h3 class="surtitre surtitre--clair">Commander</h3>
+          <p class="info__texte">Sur place ou à emporter, depuis la carte. Vous gagnez des points à chaque commande.</p>
+          <div class="info__actions">
+            <a class="bouton bouton--beurre" href="#carte">Voir la carte</a>
+            <a class="bouton bouton--contour-clair" href="fidelite.html">Mes points</a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
 </main>
+
+<!-- ==========================================================================
+     Panier — barre fixe en bas d'écran, puis fenêtre de validation.
+     ========================================================================== -->
+<div class="panier-barre" id="panier-barre" hidden>
+  <div class="conteneur panier-barre__corps">
+    <p class="panier-barre__resume"><strong data-panier-nombre>0</strong> <span data-panier-mot>article</span> · <span data-panier-total>0 €</span></p>
+    <button class="bouton bouton--beurre" type="button" data-ouvrir-panier>Voir le panier</button>
+  </div>
+</div>
+
+<dialog class="fenetre" id="fenetre-article" aria-labelledby="article-titre">
+  <form method="dialog" class="fenetre__corps" id="form-article">
+    <header class="fenetre__entete">
+      <h2 class="fenetre__titre" id="article-titre"></h2>
+      <button class="fenetre__fermer" value="annuler" aria-label="Fermer">×</button>
+    </header>
+    <p class="fenetre__texte" id="article-description"></p>
+    <div id="article-options"></div>
+    <footer class="fenetre__pied">
+      <div class="quantite">
+        <button type="button" class="quantite__bouton" data-q="-1" aria-label="Un de moins">−</button>
+        <output class="quantite__valeur" id="article-quantite">1</output>
+        <button type="button" class="quantite__bouton" data-q="1" aria-label="Un de plus">+</button>
+      </div>
+      <button class="bouton bouton--ardoise" value="ajouter" id="article-ajouter">Ajouter</button>
+    </footer>
+  </form>
+</dialog>
+
+<dialog class="fenetre" id="fenetre-panier" aria-labelledby="panier-titre">
+  <form class="fenetre__corps" id="form-panier" novalidate>
+    <header class="fenetre__entete">
+      <h2 class="fenetre__titre" id="panier-titre">Votre commande</h2>
+      <button type="button" class="fenetre__fermer" data-fermer aria-label="Fermer">×</button>
+    </header>
+
+    <ul class="panier-lignes" id="panier-lignes"></ul>
+    <p class="panier-total"><span>Total estimé</span><strong data-panier-total>0 €</strong></p>
+    <p class="fenetre__texte fenetre__texte--doux">Les remises (fidélité, heure mystère…) sont calculées à la validation.</p>
+
+    <fieldset class="champ">
+      <legend class="champ__libelle">Où mangez-vous ?</legend>
+      <div class="choix-segment">
+        <label><input type="radio" name="mode" value="sur_place" checked> Sur place</label>
+        <label><input type="radio" name="mode" value="a_emporter"> À emporter</label>
+      </div>
+    </fieldset>
+    <label class="champ" data-champ-table>
+      <span class="champ__libelle">Numéro de table <span class="champ__facultatif">facultatif</span></span>
+      <input class="champ__saisie" name="table_numero" maxlength="10" inputmode="numeric" autocomplete="off">
+    </label>
+    <label class="champ">
+      <span class="champ__libelle">Prénom</span>
+      <input class="champ__saisie" name="client_nom" maxlength="80" autocomplete="given-name" required>
+    </label>
+    <label class="champ">
+      <span class="champ__libelle">Téléphone <span class="champ__facultatif">pour cumuler des points</span></span>
+      <input class="champ__saisie" name="client_tel" maxlength="30" type="tel" autocomplete="tel">
+    </label>
+    <label class="champ">
+      <span class="champ__libelle">Heure souhaitée <span class="champ__facultatif">sinon dès que possible</span></span>
+      <input class="champ__saisie" name="heure_souhaitee" type="time" step="300">
+    </label>
+    <label class="champ">
+      <span class="champ__libelle">Un mot pour la cuisine <span class="champ__facultatif">facultatif</span></span>
+      <textarea class="champ__saisie" name="note" maxlength="200" rows="2"></textarea>
+    </label>
+
+    <p class="message-erreur" id="panier-erreur" role="alert" hidden></p>
+
+    <footer class="fenetre__pied">
+      <button type="button" class="bouton bouton--contour" data-vider>Vider</button>
+      <button type="submit" class="bouton bouton--beurre" id="panier-valider">Commander</button>
+    </footer>
+  </form>
+</dialog>
+
+<script type="module" src="assets/accueil.js"></script>
 
 <!-- ==========================================================================
      Pied de page

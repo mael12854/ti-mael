@@ -200,6 +200,7 @@ a:hover {
   text-transform: uppercase;
   text-decoration: none;
   border: 1.5px solid transparent;
+  background: transparent;
   transition: background-color 0.15s, color 0.15s, border-color 0.15s;
 }
 
@@ -737,4 +738,589 @@ a:hover {
   padding-top: 20px;
   padding-bottom: 32px;
   border-top: 1px solid var(--filet);
+}
+
+/* --------------------------------------------------------------------------
+   12. Commande en ligne — boutons d'ajout, panier, fenêtres, champs
+   -------------------------------------------------------------------------- */
+
+[hidden] {
+  display: none !important;
+}
+
+.plat--commande {
+  align-items: center;
+}
+
+.plat--commande .plat__nom {
+  flex: 1;
+}
+
+.plat__ajouter {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1.5px solid var(--ardoise);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ardoise);
+  font: 400 1.375rem/1 var(--sans);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.plat__ajouter:hover {
+  background: var(--ardoise);
+  color: var(--lin);
+}
+
+.bouton {
+  cursor: pointer;
+}
+
+.bouton:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.bouton--contour-clair {
+  border-color: var(--lin);
+  color: var(--lin);
+}
+
+.bouton--contour-clair:hover {
+  background: var(--lin);
+  color: var(--ardoise);
+}
+
+.info__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Barre de panier, fixée en bas. */
+.panier-barre {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 20;
+  background: var(--ardoise);
+  color: var(--lin);
+  box-shadow: 0 -4px 16px rgb(26 32 38 / 0.18);
+}
+
+.panier-barre__corps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 72px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.panier-barre__resume {
+  font-size: 1.0625rem;
+}
+
+.panier-barre__resume strong {
+  font-weight: 500;
+  color: var(--beurre);
+}
+
+body.avec-panier {
+  padding-bottom: 72px;
+}
+
+/* Fenêtres (dialog natif). */
+.fenetre {
+  width: min(560px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: 0;
+  border: 0;
+  background: var(--papier);
+  color: var(--encre);
+  box-shadow: 0 12px 40px rgb(26 32 38 / 0.3);
+}
+
+.fenetre::backdrop {
+  background: rgb(26 32 38 / 0.55);
+}
+
+.fenetre__corps {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 28px;
+}
+
+.fenetre__entete {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--filet);
+}
+
+.fenetre__titre {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.875rem;
+  line-height: 1.1;
+}
+
+.fenetre__fermer {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  margin: -6px -8px 0 0;
+  border: 0;
+  background: transparent;
+  color: var(--gris);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.fenetre__fermer:hover {
+  color: var(--homard);
+}
+
+.fenetre__texte {
+  color: var(--texte);
+}
+
+.fenetre__texte:empty {
+  display: none;
+}
+
+.fenetre__texte--doux {
+  font-size: 0.875rem;
+  color: var(--gris);
+}
+
+.fenetre__pied {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 6px;
+}
+
+/* Champs de formulaire. */
+.champ {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.champ__libelle {
+  padding: 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ardoise);
+}
+
+.champ__facultatif {
+  margin-left: 6px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--gris);
+}
+
+.champ__saisie {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1px solid var(--pointille);
+  border-radius: 0;
+  background: #fff;
+  color: var(--encre);
+  font: 400 1rem/1.4 var(--sans);
+}
+
+.champ__saisie:focus {
+  outline: 2px solid var(--beurre);
+  outline-offset: 0;
+  border-color: var(--ardoise);
+}
+
+textarea.champ__saisie {
+  resize: vertical;
+}
+
+.choix-segment {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--ardoise);
+}
+
+.choix-segment label {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 46px;
+  cursor: pointer;
+  color: var(--ardoise);
+}
+
+.choix-segment input {
+  position: absolute;
+  opacity: 0;
+}
+
+.choix-segment label:has(input:checked) {
+  background: var(--ardoise);
+  color: var(--lin);
+}
+
+.choix-segment label:has(input:focus-visible) {
+  outline: 2px solid var(--beurre);
+  outline-offset: -4px;
+}
+
+.choix-liste {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--filet);
+}
+
+.choix-liste__option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+}
+
+.choix-liste__option + .choix-liste__option {
+  border-top: 1px solid var(--filet);
+}
+
+.choix-liste__option:has(input:checked) {
+  background: var(--lin);
+}
+
+.choix-liste__option input {
+  margin-top: 4px;
+  accent-color: var(--ardoise);
+}
+
+.choix-liste__option small {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--gris);
+}
+
+/* Compteur de quantité. */
+.quantite {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--pointille);
+}
+
+.quantite__bouton {
+  width: 40px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--ardoise);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.quantite__bouton:hover {
+  background: var(--lin);
+}
+
+.quantite__valeur {
+  min-width: 28px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.quantite--petite .quantite__bouton {
+  width: 32px;
+  height: 34px;
+}
+
+/* Lignes du panier. */
+.panier-lignes {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  list-style: none;
+}
+
+.panier-ligne {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px dashed var(--filet);
+}
+
+.panier-ligne__nom small {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--gris);
+}
+
+.panier-ligne__prix {
+  min-width: 64px;
+  text-align: right;
+  font-weight: 500;
+  color: var(--ardoise);
+}
+
+.panier-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.125rem;
+}
+
+.panier-total strong {
+  font-weight: 500;
+  color: var(--ardoise);
+}
+
+.message-erreur {
+  padding: 12px 14px;
+  border-left: 3px solid var(--homard);
+  background: rgb(194 69 45 / 0.08);
+  color: var(--homard-texte);
+}
+
+.message-info {
+  padding: 12px 14px;
+  border-left: 3px solid var(--beurre);
+  background: var(--lin);
+  color: var(--texte);
+}
+
+/* Avis clients. */
+.avis-liste {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.avis {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px;
+  background: var(--lin);
+  border-top: 3px solid var(--beurre);
+}
+
+.avis__note {
+  color: var(--beurre-texte);
+  letter-spacing: 0.1em;
+}
+
+.avis__note span {
+  color: var(--filet);
+}
+
+.avis__texte {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.375rem;
+  line-height: 1.3;
+  color: var(--ardoise);
+}
+
+.avis__auteur {
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gris);
+}
+
+/* --------------------------------------------------------------------------
+   13. Pages outils — suivi, fidélité, cuisine, gestion
+   -------------------------------------------------------------------------- */
+
+.page-outil {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--papier);
+}
+
+.page-outil main {
+  flex: 1;
+  padding: clamp(32px, 6vw, 64px) 0 var(--section);
+}
+
+.entete-outil {
+  background: var(--papier);
+  border-bottom: 1px solid var(--filet);
+}
+
+.entete-outil__barre {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 72px;
+}
+
+.entete-outil .signature__badge {
+  width: 52px;
+  height: 52px;
+}
+
+.entete-outil__liens {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+}
+
+.entete-outil__liens a,
+.entete-outil__liens button {
+  border: 0;
+  background: none;
+  padding: 0;
+  font: 500 0.8125rem/1 var(--sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ardoise);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.entete-outil__liens a:hover,
+.entete-outil__liens button:hover {
+  color: var(--homard);
+}
+
+.conteneur--etroit {
+  max-width: calc(640px + 2 * var(--gouttiere));
+}
+
+.titre-outil {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2.25rem, 6vw, 3.5rem);
+  line-height: 1;
+}
+
+.bloc {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 28px;
+  background: var(--lin);
+}
+
+.bloc--ardoise {
+  background: var(--ardoise);
+  color: var(--lin);
+}
+
+.pile {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.rangee {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.grand-numero {
+  font-family: var(--serif);
+  font-size: clamp(5rem, 22vw, 9rem);
+  line-height: 0.9;
+  color: var(--ardoise);
+}
+
+/* Étapes de la commande. */
+.etapes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  padding: 0;
+  list-style: none;
+}
+
+.etape {
+  padding-top: 10px;
+  border-top: 4px solid var(--filet);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gris);
+}
+
+.etape--faite {
+  border-top-color: var(--ardoise);
+  color: var(--ardoise);
+}
+
+.etape--en-cours {
+  border-top-color: var(--beurre);
+  color: var(--encre);
+}
+
+.lignes-commande {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0;
+  list-style: none;
+}
+
+.lignes-commande li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.etoiles {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.etoiles input {
+  position: absolute;
+  opacity: 0;
+}
+
+.etoiles label {
+  font-size: 2.25rem;
+  line-height: 1;
+  color: var(--filet);
+  cursor: pointer;
+}
+
+.etoiles label:hover,
+.etoiles label:hover ~ label,
+.etoiles input:checked ~ label {
+  color: var(--beurre);
+}
+
+.etoiles input:focus-visible + label {
+  outline: 2px solid var(--ardoise);
 }

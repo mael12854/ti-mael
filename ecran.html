@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Écran de salle — Ti Maël</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/badge.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  body { min-height: 100dvh; display: flex; flex-direction: column; background: var(--ardoise); color: var(--lin); }
+  .ecran { flex: 1; display: grid; grid-template-columns: 1fr 1.4fr; gap: 4vw; padding: 4vw; }
+  .ecran h2 { font-family: var(--sans); font-weight: 500; font-size: clamp(1rem, 2vw, 1.5rem); letter-spacing: .16em; text-transform: uppercase; color: var(--gris-ardoise); margin-bottom: 2vw; }
+  .ecran__colonne--pret h2 { color: var(--beurre); }
+  .numeros { display: flex; flex-wrap: wrap; gap: 1.5vw 3vw; padding: 0; list-style: none; font-family: var(--serif); line-height: 1; }
+  .ecran__colonne--attente .numeros { font-size: clamp(2.5rem, 6vw, 5rem); color: var(--gris-ardoise); }
+  .ecran__colonne--pret .numeros { font-size: clamp(4rem, 11vw, 10rem); color: var(--lin); }
+  .ecran__pied { display: flex; align-items: center; gap: 16px; padding: 0 4vw 3vw; }
+  .ecran__pied img { width: 64px; height: 64px; }
+  .ecran__pied p { font-family: var(--serif); font-size: 1.5rem; }
+  @media (max-width: 700px) { .ecran { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+  <div class="bandeau-mariniere" aria-hidden="true"></div>
+  <main class="ecran">
+    <section class="ecran__colonne--attente">
+      <h2>Sur la bilig</h2>
+      <ul class="numeros" id="attente"></ul>
+    </section>
+    <section class="ecran__colonne--pret" aria-live="polite">
+      <h2>C'est prêt</h2>
+      <ul class="numeros" id="pret"></ul>
+    </section>
+  </main>
+  <footer class="ecran__pied">
+    <img src="assets/badge.svg" alt="">
+    <p>Ti Maël <span class="italique" style="color:var(--beurre)">crêperie</span></p>
+  </footer>
+<script type="module">
+  import { rpc } from "./assets/api.js";
+  const li = (c) => `<li>${c.numero_jour}</li>`;
+  async function actualiser() {
+    try {
+      const commandes = await rpc("commandes_ecran");
+      document.querySelector("#pret").innerHTML = commandes.filter((c) => c.statut === "prete").map(li).join("");
+      document.querySelector("#attente").innerHTML = commandes.filter((c) => c.statut !== "prete").map(li).join("");
+    } catch { /* on réessaie au prochain tour */ }
+  }
+  actualiser();
+  setInterval(actualiser, 5000);
+</script>
+</body>
+</html>

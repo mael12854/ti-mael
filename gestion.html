@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gestion — Ti Maël</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1f3a4d">
+<link rel="icon" href="assets/badge.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/equipe.css">
+</head>
+<body class="page-outil">
+
+<header class="entete-outil">
+  <div class="bandeau-mariniere" aria-hidden="true"></div>
+  <div class="conteneur conteneur--large entete-outil__barre">
+    <a class="signature" href="./">
+      <img class="signature__badge" src="assets/badge.svg" alt="">
+      <span class="signature__nom">Ti Maël<br><span class="italique">gestion</span></span>
+    </a>
+    <nav class="entete-outil__liens" aria-label="Navigation" data-connecte hidden>
+      <a href="cuisine.html">Cuisine</a>
+      <a href="./" target="_blank" rel="noopener">Voir le site</a>
+      <button type="button" data-deconnexion>Quitter</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="conteneur conteneur--large">
+
+    <form class="bloc porte" id="porte">
+      <p class="mention">Accès gestion</p>
+      <label class="champ">
+        <span class="champ__libelle">Code</span>
+        <input class="champ__saisie" name="pin" type="password" autocomplete="current-password" required>
+      </label>
+      <p class="message-erreur" role="alert" hidden></p>
+      <p><button class="bouton bouton--ardoise">Entrer</button></p>
+    </form>
+
+    <div class="pile" data-connecte hidden>
+      <div class="onglets" role="tablist">
+        <button role="tab" aria-selected="true" data-onglet="carte">La carte</button>
+        <button role="tab" aria-selected="false" data-onglet="horaires">Horaires</button>
+        <button role="tab" aria-selected="false" data-onglet="remises">Remises &amp; fidélité</button>
+        <button role="tab" aria-selected="false" data-onglet="roue">La roue</button>
+        <button role="tab" aria-selected="false" data-onglet="avis">Avis</button>
+      </div>
+
+      <!-- La carte ------------------------------------------------------ -->
+      <section data-panneau="carte" class="pile">
+        <div id="carte-rubriques" class="pile"></div>
+        <form class="bloc" id="form-nouvelle-rubrique">
+          <h2 class="surtitre">Nouvelle rubrique</h2>
+          <div class="grille-champs">
+            <label class="champ"><span class="champ__libelle">Nom</span>
+              <input class="champ__saisie" name="nom" required placeholder="Galettes de blé noir"></label>
+            <label class="champ"><span class="champ__libelle">Ordre</span>
+              <input class="champ__saisie" name="position" type="number" value="50"></label>
+          </div>
+          <p><button class="bouton bouton--ardoise">Ajouter la rubrique</button></p>
+        </form>
+      </section>
+
+      <!-- Horaires ------------------------------------------------------ -->
+      <section data-panneau="horaires" hidden>
+        <form class="bloc" id="form-service">
+          <h2 class="surtitre">Ouverture des commandes en ligne</h2>
+          <div class="choix-segment choix-segment--trois">
+            <label><input type="radio" name="mode" value="auto"> Selon les horaires</label>
+            <label><input type="radio" name="mode" value="ouvert"> Forcer ouvert</label>
+            <label><input type="radio" name="mode" value="ferme"> Forcer fermé</label>
+          </div>
+          <div class="grille-champs">
+            <label class="champ"><span class="champ__libelle">Ouverture</span>
+              <input class="champ__saisie" name="debut" type="time" required></label>
+            <label class="champ"><span class="champ__libelle">Fermeture</span>
+              <input class="champ__saisie" name="fin" type="time" required></label>
+          </div>
+          <fieldset class="champ">
+            <legend class="champ__libelle">Jours d'ouverture</legend>
+            <div class="cases" id="cases-jours"></div>
+          </fieldset>
+          <label class="champ"><span class="champ__libelle">Message quand c'est fermé</span>
+            <textarea class="champ__saisie" name="message" rows="2" maxlength="300"></textarea></label>
+          <label class="champ"><span class="champ__libelle">Message de fermeture longue <span class="champ__facultatif">affiché si « Forcer fermé » ; vide = aucun</span></span>
+            <textarea class="champ__saisie" name="message_saison" rows="2" maxlength="300"></textarea></label>
+          <p><button class="bouton bouton--ardoise">Enregistrer</button></p>
+        </form>
+      </section>
+
+      <!-- Remises & fidélité -------------------------------------------- -->
+      <section data-panneau="remises" hidden class="grille-blocs">
+        <form class="bloc" data-reglage="fidelite">
+          <h2 class="surtitre">Points de fidélité</h2>
+          <label class="interrupteur"><input type="checkbox" name="actif"><span>Actif</span></label>
+          <div class="grille-champs">
+            <label class="champ"><span class="champ__libelle">Points par euro</span>
+              <input class="champ__saisie" name="points_par_euro" type="number" min="1" max="10"></label>
+            <label class="champ"><span class="champ__libelle">Palier de la roue</span>
+              <input class="champ__saisie" name="seuil" type="number" min="10" max="10000"></label>
+          </div>
+          <input type="hidden" name="remise_cents" value="1000">
+          <p><button class="bouton bouton--ardoise">Enregistrer</button></p>
+        </form>
+
+        <form class="bloc" data-reglage="remise_quantite">
+          <h2 class="surtitre">Remise sur la quantité</h2>
+          <p class="plat__detail">Le même plat commandé plusieurs fois : remise sur les suivants.</p>
+          <label class="interrupteur"><input type="checkbox" name="actif"><span>Actif</span></label>
+          <div class="grille-champs">
+            <label class="champ"><span class="champ__libelle">À partir de</span>
+              <input class="champ__saisie" name="des" type="number" min="2" max="10"></label>
+            <label class="champ"><span class="champ__libelle">Remise %</span>
+              <input class="champ__saisie" name="pourcentage" type="number" min="1" max="100"></label>
+          </div>
+          <p><button class="bouton bouton--ardoise">Enregistrer</button></p>
+        </form>
+
+        <form class="bloc" data-reglage="happy_hour">
+          <h2 class="surtitre">Heure mystère / happy hour</h2>
+          <label class="interrupteur"><input type="checkbox" name="actif"><span>Actif</span></label>
+          <label class="champ"><span class="champ__libelle">Mode</span>
+            <select class="champ__saisie" name="mode">
+              <option value="aleatoire">Heure mystère (une heure tirée au sort par tranche de 6 h)</option>
+              <option value="fixe">Plage fixe</option>
+            </select></label>
+          <label class="champ"><span class="champ__libelle">Rubrique concernée</span>
+            <select class="champ__saisie" name="rayon_slug" data-liste-rubriques></select></label>
+          <div class="grille-champs">
+            <label class="champ"><span class="champ__libelle">Début (plage fixe)</span>
+              <input class="champ__saisie" name="debut" type="time"></label>
+            <label class="champ"><span class="champ__libelle">Fin (plage fixe)</span>
+              <input class="champ__saisie" name="fin" type="time"></label>
+            <label class="champ"><span class="champ__libelle">Remise %</span>
+              <input class="champ__saisie" name="pourcentage" type="number" min="1" max="100"></label>
+          </div>
+          <p><button class="bouton bouton--ardoise">Enregistrer</button></p>
+        </form>
+
+        <form class="bloc" data-reglage="tampons">
+          <h2 class="surtitre">Carte à tampons</h2>
+          <p class="plat__detail">La n-ième de la rubrique offerte (téléphone requis à la commande).</p>
+          <label class="interrupteur"><input type="checkbox" name="actif"><span>Actif</span></label>
+          <div class="grille-champs">
+            <label class="champ"><span class="champ__libelle">Rubrique</span>
+              <select class="champ__saisie" name="rayon_slug" data-liste-rubriques></select></label>
+            <label class="champ"><span class="champ__libelle">Offerte tous les</span>
+              <input class="champ__saisie" name="nieme" type="number" min="2" max="30"></label>
+          </div>
+          <p><button class="bouton bouton--ardoise">Enregistrer</button></p>
+        </form>
+      </section>
+
+      <!-- La roue -------------------------------------------------------- -->
+      <section data-panneau="roue" hidden>
+        <form class="bloc" id="form-roue">
+          <h2 class="surtitre">Lots de la roue</h2>
+          <label class="interrupteur"><input type="checkbox" name="actif"><span>Roue active</span></label>
+          <p class="plat__detail">Le poids règle la chance : un lot de poids 4 sort quatre fois plus qu'un lot de poids 1.</p>
+          <div class="tableau-defilant">
+            <table class="tableau tableau--saisie">
+              <thead><tr><th>Titre</th><th>Type</th><th>Cible</th><th>Remise €</th><th>Poids</th><th></th></tr></thead>
+              <tbody id="lots"></tbody>
+            </table>
+          </div>
+          <p class="rangee">
+            <button type="button" class="bouton bouton--contour" id="ajouter-lot">Ajouter un lot</button>
+            <button class="bouton bouton--ardoise">Enregistrer la roue</button>
+          </p>
+        </form>
+      </section>
+
+      <!-- Avis ----------------------------------------------------------- -->
+      <section data-panneau="avis" hidden>
+        <div id="liste-avis" class="pile"></div>
+      </section>
+    </div>
+
+  </div>
+</main>
+
+<!-- Fiche article -->
+<dialog class="fenetre fenetre--large" id="fenetre-plat" aria-labelledby="plat-titre">
+  <form class="fenetre__corps" id="form-plat">
+    <header class="fenetre__entete">
+      <h2 class="fenetre__titre" id="plat-titre">Plat</h2>
+      <button type="button" class="fenetre__fermer" data-fermer aria-label="Fermer">×</button>
+    </header>
+    <input type="hidden" name="id">
+    <div class="grille-champs">
+      <label class="champ"><span class="champ__libelle">Nom</span>
+        <input class="champ__saisie" name="nom" required maxlength="80"></label>
+      <label class="champ"><span class="champ__libelle">Prix €</span>
+        <input class="champ__saisie" name="prix" type="number" min="0" max="500" step="0.1" required></label>
+    </div>
+    <label class="champ"><span class="champ__libelle">Description <span class="champ__facultatif">facultatif</span></span>
+      <input class="champ__saisie" name="description" maxlength="200"></label>
+    <div class="grille-champs">
+      <label class="champ"><span class="champ__libelle">Rubrique</span>
+        <select class="champ__saisie" name="rayon_id" id="plat-rubrique"></select></label>
+      <label class="champ"><span class="champ__libelle">Ordre</span>
+        <input class="champ__saisie" name="position" type="number"></label>
+    </div>
+    <label class="interrupteur"><input type="checkbox" name="disponible"><span>Disponible à la carte</span></label>
+
+    <details class="replie">
+      <summary>Choix proposé au client <span class="champ__facultatif">recette, parfum…</span></summary>
+      <div class="pile pile--serre">
+        <label class="champ"><span class="champ__libelle">Intitulé du choix</span>
+          <input class="champ__saisie" name="variante_titre" maxlength="30" placeholder="Garniture"></label>
+        <label class="champ"><span class="champ__libelle">Valeurs <span class="champ__facultatif">une par ligne ; « Nom : description » si besoin</span></span>
+          <textarea class="champ__saisie" name="variante_valeurs" rows="4"></textarea></label>
+      </div>
+    </details>
+
+    <details class="replie">
+      <summary>Formule <span class="champ__facultatif">un plat à choisir dans chaque rubrique cochée</span></summary>
+      <div class="cases" id="plat-formule"></div>
+    </details>
+
+    <details class="replie">
+      <summary>Suppléments <span class="champ__facultatif">payants, facultatifs</span></summary>
+      <label class="champ"><span class="champ__libelle">Un par ligne : « Nom ; prix € »</span>
+        <textarea class="champ__saisie" name="supplements" rows="4" placeholder="Œuf ; 1&#10;Fromage râpé ; 1,5"></textarea></label>
+    </details>
+
+    <label class="interrupteur"><input type="checkbox" name="debloque_par_roue"><span>Réservé aux gagnants de la roue (masqué de la carte)</span></label>
+
+    <p class="message-erreur" role="alert" hidden></p>
+    <footer class="fenetre__pied">
+      <button type="button" class="bouton bouton--texte" data-supprimer>Supprimer</button>
+      <button class="bouton bouton--ardoise">Enregistrer</button>
+    </footer>
+  </form>
+</dialog>
+
+<script type="module" src="assets/gestion.js"></script>
+</body>
+</html>
