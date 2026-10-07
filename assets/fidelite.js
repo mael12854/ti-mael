@@ -5,8 +5,8 @@ import { rpc, euros, html, memoire } from "./api.js";
 const form = document.querySelector("#form-tel");
 const compte = document.querySelector("#compte");
 const erreur = form.querySelector(".message-erreur");
-const COULEURS = ["#1f3a4d", "#e2b44b", "#f3eee3", "#c2452d", "#4f6b4a", "#7a5434"];
-const TEXTE_SUR = { "#e2b44b": "#1a2026", "#f3eee3": "#1f3a4d" };
+const COULEURS = ["#1f3a4d", "#e2b44b", "#f3eee3", "#c2452d", "#5d8fa6", "#7a5434"];
+const TEXTE_SUR = { "#e2b44b": "#1a2026", "#f3eee3": "#1f3a4d", "#5d8fa6": "#1a2026" };
 
 let telephone = "";
 let rotation = 0;

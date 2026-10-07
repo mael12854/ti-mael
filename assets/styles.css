@@ -17,7 +17,7 @@
   /* Accents */
   --homard: #c2452d;
   --ble-noir: #7a5434;
-  --goemon: #4f6b4a;
+  --volet: #5d8fa6;
   --encre: #1a2026;
 
   /* Déclinaisons de lisibilité */
@@ -254,13 +254,18 @@ a:hover {
   --badge-lettrage: var(--lin);
   --badge-marque: var(--beurre);
   --badge-ciel: #dfe7e6;
-  --badge-sol: #cdc4b2;
-  --badge-pierre: #b9b3a6;
-  --badge-toit: #3d4955;
+  --badge-soleil: var(--beurre);
+  --badge-herbe: #9fae7c;
+  --badge-sol: #e3d6b8;
+  --badge-contour: #d2d1cc;
+  --badge-mur: #fbf8f1;
+  --badge-tuile: #c8673f;
+  --badge-tuile-ombre: #b05734;
+  --badge-avant-toit: #9e4a2b;
+  --badge-volet: var(--volet);
   --badge-vitre: #26343e;
-  --badge-porte: var(--homard);
-  --badge-store-a: var(--ardoise);
-  --badge-enseigne: var(--beurre);
+  --badge-porte: var(--volet);
+  --badge-seuil: #a09a87;
 }
 
 /* Monochrome, à poser sur un aplat Ardoise. */
@@ -269,13 +274,18 @@ a:hover {
   --badge-lettrage: var(--ardoise);
   --badge-marque: var(--ardoise);
   --badge-ciel: var(--lin);
+  --badge-soleil: var(--ardoise);
+  --badge-herbe: var(--lin);
   --badge-sol: var(--lin);
-  --badge-pierre: var(--lin);
-  --badge-toit: var(--ardoise);
+  --badge-contour: var(--ardoise);
+  --badge-mur: var(--lin);
+  --badge-tuile: var(--ardoise);
+  --badge-tuile-ombre: var(--lin);
+  --badge-avant-toit: var(--ardoise);
+  --badge-volet: var(--lin);
   --badge-vitre: var(--ardoise);
   --badge-porte: var(--ardoise);
-  --badge-store-a: var(--ardoise);
-  --badge-enseigne: var(--ardoise);
+  --badge-seuil: var(--ardoise);
 }
 
 /* --------------------------------------------------------------------------

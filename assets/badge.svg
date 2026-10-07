@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Badge Ti Maël">
-  <!-- Badge Ti Maël, version couleur (charte 2026 · v2). -->
+  <!-- Badge Ti Maël, version couleur : la maison vendéenne de plain-pied (charte 2026 · v2). -->
   <defs>
     <path id="arc-haut" d="M 26,100 A 74,74 0 0 1 174,100" fill="none"/>
     <path id="arc-bas" d="M 20,100 A 80,80 0 0 0 180,100" fill="none"/>
@@ -7,38 +7,37 @@
   <circle cx="100" cy="100" r="99" fill="#1f3a4d"/>
   <circle cx="100" cy="100" r="66" fill="#dfe7e6"/>
   <g>
-    <rect x="30" y="70" width="28" height="72" fill="#b9b3a6" opacity="0.5"/>
-    <rect x="142" y="58" width="28" height="84" fill="#b9b3a6" opacity="0.5"/>
-    <rect x="30" y="142" width="140" height="28" fill="#cdc4b2"/>
-    <rect x="30" y="142" width="140" height="1.6" fill="#26343e" opacity="0.35"/>
-    <rect x="58" y="44" width="84" height="98" fill="#b9b3a6"/>
-    <rect x="55" y="41" width="90" height="4" fill="#3d4955"/>
+    <circle cx="128" cy="62" r="9.7" fill="#e2b44b"/>
+    <rect x="30" y="136.8" width="140" height="3.6" fill="#9fae7c"/>
+    <rect x="30" y="140.2" width="140" height="29.8" fill="#e3d6b8"/>
+    <rect x="30" y="140.2" width="140" height="0.8" fill="#d2d1cc"/>
+    <rect x="118.7" y="75" width="7.8" height="8" fill="#fbf8f1" stroke="#d2d1cc" stroke-width="0.8"/>
+    <rect x="117.3" y="72.7" width="10.5" height="2.3" fill="#c8673f"/>
+    <rect x="50.4" y="99.5" width="99.2" height="40.7" fill="#fbf8f1" stroke="#d2d1cc" stroke-width="0.8"/>
+    <path d="M 64.2,82.2 L 135.9,82.2 L 156,99.2 L 44,99.2 Z" fill="#c8673f"/>
+    <g fill="#b05734">
+      <rect x="59.3" y="86" width="81.5" height="0.8"/>
+      <rect x="54.3" y="90.1" width="91.4" height="0.8"/>
+      <rect x="49.3" y="94.2" width="101.4" height="0.8"/>
+    </g>
+    <rect x="41.9" y="99.2" width="116.2" height="2" fill="#9e4a2b"/>
+    <g fill="#5d8fa6">
+      <rect x="56.2" y="108.3" width="5.6" height="17.7"/>
+      <rect x="78.3" y="108.3" width="5.4" height="17.7"/>
+      <rect x="116.3" y="108.3" width="5.4" height="17.7"/>
+      <rect x="138.4" y="108.3" width="5.4" height="17.7"/>
+    </g>
     <g fill="#26343e">
-      <rect x="66" y="51" width="12" height="10"/><rect x="94" y="51" width="12" height="10"/><rect x="122" y="51" width="12" height="10"/>
-      <rect x="66" y="67" width="12" height="10"/><rect x="94" y="67" width="12" height="10"/><rect x="122" y="67" width="12" height="10"/>
-      <rect x="66" y="83" width="12" height="10"/><rect x="94" y="83" width="12" height="10"/><rect x="122" y="83" width="12" height="10"/>
+      <rect x="62.1" y="108.3" width="15.9" height="17.7"/>
+      <rect x="122" y="108.3" width="16" height="17.7"/>
     </g>
-    <g fill="#3d4955">
-      <rect x="64" y="61" width="16" height="1.6"/><rect x="92" y="61" width="16" height="1.6"/><rect x="120" y="61" width="16" height="1.6"/>
-      <rect x="64" y="77" width="16" height="1.6"/><rect x="92" y="77" width="16" height="1.6"/><rect x="120" y="77" width="16" height="1.6"/>
-      <rect x="64" y="93" width="16" height="1.6"/><rect x="92" y="93" width="16" height="1.6"/><rect x="120" y="93" width="16" height="1.6"/>
+    <g fill="#fbf8f1">
+      <rect x="69.4" y="108.3" width="0.8" height="17.7"/>
+      <rect x="129.7" y="108.3" width="0.8" height="17.7"/>
     </g>
-    <rect x="58" y="100" width="84" height="2.4" fill="#3d4955"/>
-    <rect x="62" y="110" width="7" height="20" fill="#1f3a4d"/>
-    <rect x="69" y="110" width="16" height="20" fill="#e2b44b"/>
-    <rect x="76.5" y="110" width="1" height="20" fill="#26343e" opacity="0.5"/>
-    <rect x="69" y="119.5" width="16" height="1" fill="#26343e" opacity="0.5"/>
-    <rect x="85" y="110" width="7" height="20" fill="#1f3a4d"/>
-    <rect x="108" y="110" width="7" height="20" fill="#1f3a4d"/>
-    <rect x="115" y="110" width="16" height="20" fill="#e2b44b"/>
-    <rect x="122.5" y="110" width="1" height="20" fill="#26343e" opacity="0.5"/>
-    <rect x="115" y="119.5" width="16" height="1" fill="#26343e" opacity="0.5"/>
-    <rect x="131" y="110" width="7" height="20" fill="#1f3a4d"/>
-    <rect x="67" y="130" width="20" height="4" fill="#c2452d"/>
-    <rect x="113" y="130" width="20" height="4" fill="#c2452d"/>
-    <rect x="94" y="114" width="12" height="28" fill="#26343e"/>
-    <circle cx="103.5" cy="128" r="1" fill="#dfe7e6"/>
-    <rect x="92" y="140.4" width="16" height="1.6" fill="#3d4955"/>
+    <rect x="92.2" y="110.4" width="15.8" height="28.9" fill="#5d8fa6"/>
+    <circle cx="104.4" cy="126.3" r="1" fill="#fbf8f1"/>
+    <rect x="89.1" y="139.6" width="21.8" height="1.4" fill="#a09a87"/>
   </g>
   <path d="M 100,1 A 99,99 0 1 0 100,199 A 99,99 0 1 0 100,1 Z M 100,34 A 66,66 0 1 1 100,166 A 66,66 0 1 1 100,34 Z" fill="#1f3a4d" fill-rule="evenodd"/>
   <circle cx="100" cy="100" r="92" fill="none" stroke="#f3eee3" stroke-width="1.2" opacity="0.6"/>
