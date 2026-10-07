@@ -69,8 +69,8 @@
 
 .service-pastille {
   padding: 6px 12px;
-  background: var(--goemon);
-  color: var(--lin);
+  background: var(--volet);
+  color: var(--encre);
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -79,6 +79,7 @@
 
 .service-pastille--ferme {
   background: var(--homard);
+  color: var(--lin);
 }
 
 /* Tickets de cuisine. */
@@ -101,7 +102,7 @@
 
 .ticket--recue { border-top-color: var(--homard); }
 .ticket--en_preparation { border-top-color: var(--beurre); }
-.ticket--prete { border-top-color: var(--goemon); }
+.ticket--prete { border-top-color: var(--volet); }
 .ticket--servie,
 .ticket--annulee { opacity: 0.65; border-top-color: var(--filet); }
 

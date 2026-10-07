@@ -1,6 +1,6 @@
 # Ti Maël
 
-Site vitrine de Ti Maël, crêperie bretonne au rez-de-chaussée.
+Site de Ti Maël, la crêperie aux volets bleus, dans une maison vendéenne de plain-pied.
 Site statique (HTML/CSS, aucune étape de build) construit d'après la charte de marque Ti Maël (2026 · v2).
 
 - `index.html` : la page (accueil, la maison, la carte, infos pratiques)
