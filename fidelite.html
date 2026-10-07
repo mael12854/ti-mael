@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fidélité — Ti Maël</title>
+<meta name="description" content="Vos points de fidélité Ti Maël et la roue des lots.">
+<meta name="theme-color" content="#1f3a4d">
+<link rel="icon" href="assets/badge.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .jauge { height: 12px; background: var(--papier); box-shadow: inset 0 0 0 1px var(--filet); }
+  .jauge__plein { height: 100%; background: var(--beurre); transition: width .6s; }
+  .roue { position: relative; width: min(100%, 360px); aspect-ratio: 1; margin: 8px auto 0; }
+  .roue svg { width: 100%; height: 100%; display: block; }
+  .roue__disque { transition: transform 4.5s cubic-bezier(.17,.67,.2,1); transform-origin: 50% 50%; }
+  .roue__fleche { position: absolute; left: 50%; top: -6px; width: 0; height: 0; transform: translateX(-50%);
+    border-left: 14px solid transparent; border-right: 14px solid transparent; border-top: 24px solid var(--homard); }
+  .avoirs { display: flex; flex-direction: column; gap: 8px; padding: 0; list-style: none; }
+  .avoirs li { padding: 12px 14px; background: var(--papier); border-left: 3px solid var(--beurre); }
+  @media (prefers-reduced-motion: reduce) { .roue__disque { transition-duration: .01s; } }
+</style>
+</head>
+<body class="page-outil">
+
+<header class="entete-outil">
+  <div class="bandeau-mariniere" aria-hidden="true"></div>
+  <div class="conteneur entete-outil__barre">
+    <a class="signature" href="./">
+      <img class="signature__badge" src="assets/badge.svg" alt="">
+      <span class="signature__nom">Ti Maël<br><span class="italique">crêperie</span></span>
+    </a>
+    <nav class="entete-outil__liens" aria-label="Navigation">
+      <a href="./#carte">La carte</a>
+      <a href="suivi.html">Ma commande</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="conteneur conteneur--etroit pile">
+    <p class="mention">Fidélité</p>
+    <h1 class="titre-outil">Vos points<br><span class="italique">et la roue</span></h1>
+    <p class="fenetre__texte">Chaque euro réglé rapporte des points. Au palier, la roue tourne : un lot à valoir sur la commande suivante.</p>
+
+    <form class="bloc" id="form-tel">
+      <label class="champ">
+        <span class="champ__libelle">Votre téléphone</span>
+        <input class="champ__saisie" name="tel" type="tel" autocomplete="tel" required>
+      </label>
+      <p class="message-erreur" role="alert" hidden></p>
+      <p><button class="bouton bouton--ardoise">Voir mes points</button></p>
+    </form>
+
+    <div id="compte" class="pile" hidden></div>
+  </div>
+</main>
+
+<footer class="pied-site">
+  <div class="conteneur pied-site__bas">
+    <p class="pied">Ti Maël · Crêperie au rez-de-chaussée</p>
+    <p class="pied"><a href="./">Accueil</a></p>
+  </div>
+  <div class="bandeau-nappe" aria-hidden="true"></div>
+</footer>
+
+<script type="module" src="assets/fidelite.js"></script>
+</body>
+</html>
