@@ -1340,3 +1340,13 @@ textarea.champ__saisie {
   flex-wrap: wrap;
   gap: 4px 12px;
 }
+
+/* Lien sur fond Ardoise : écrit en Lin, souligné en Beurre salé. */
+.lien-clair {
+  color: var(--lin);
+  text-decoration-color: var(--beurre);
+}
+
+.lien-clair:hover {
+  color: var(--beurre);
+}
