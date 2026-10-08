@@ -1,6 +1,6 @@
 // Fidélité : solde de points, lots gagnés, et la roue.
 
-import { rpc, euros, html, memoire } from "./api.js";
+import { rpc, euros, html, memoire, problemeTelephone } from "./api.js";
 
 const form = document.querySelector("#form-tel");
 const compte = document.querySelector("#compte");
@@ -115,6 +115,13 @@ async function tourner(solde, bouton) {
 
 async function charger() {
   erreur.hidden = true;
+  const probleme = problemeTelephone(telephone);
+  if (probleme) {
+    erreur.textContent = probleme;
+    erreur.hidden = false;
+    compte.hidden = true;
+    return;
+  }
   try {
     const solde = await rpc("fidelite_solde", { p_telephone: telephone });
     if (!solde) {

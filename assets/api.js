@@ -80,6 +80,23 @@ export function html(texte) {
   })[c]);
 }
 
+/**
+ * La fidélité passe par le numéro de téléphone (9 chiffres au moins, comme
+ * le vérifie la base). Renvoie un message si la saisie n'en est pas un,
+ * null sinon — un champ vide est accepté : on commande sans points.
+ */
+export function problemeTelephone(saisie) {
+  const v = (saisie || "").trim();
+  if (!v) return null;
+  if (v.includes("@")) {
+    return "C'est une adresse e-mail : les points se cumulent avec un numéro de téléphone (10 chiffres).";
+  }
+  if (v.replace(/\D/g, "").length < 9) {
+    return "Ce numéro est incomplet : il faut 10 chiffres, par exemple 06 12 34 56 78.";
+  }
+  return null;
+}
+
 export const JOURS = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
 
 /** « 12:00 » → « 12 h » ; « 12:30 » → « 12 h 30 ». */

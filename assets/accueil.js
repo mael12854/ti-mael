@@ -1,7 +1,7 @@
 // Page d'accueil : carte en direct, état du service, avis, panier et commande.
 
 import {
-  carte, rpc, commander, euros, html, heure, joursOuverts, memoire,
+  carte, rpc, commander, euros, html, heure, joursOuverts, memoire, problemeTelephone,
 } from "./api.js";
 
 const $ = (s, racine = document) => racine.querySelector(s);
@@ -293,6 +293,12 @@ formPanier.addEventListener("submit", async (e) => {
   if (!client_nom) {
     erreurPanier("Indiquez un prénom : c'est lui qu'on appellera.");
     f.client_nom.focus();
+    return;
+  }
+  const probleme = problemeTelephone(f.client_tel.value);
+  if (probleme) {
+    erreurPanier(`${probleme} Laissez vide pour commander sans points.`);
+    f.client_tel.focus();
     return;
   }
   const bouton = $("#panier-valider");
